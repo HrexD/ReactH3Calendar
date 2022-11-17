@@ -32,13 +32,14 @@ export const App = () => {
         />
 
 <div id="semaine">
-          <div>Dimanche</div>
+         
           <div>Lundi</div>
           <div>Mardi</div>
           <div>Mercredi</div>
           <div>Jeudi</div>
           <div>Vendredi</div>
           <div>Samedi</div>
+          <div>Dimanche</div>
         </div>
 
         <div id="calendrier">
