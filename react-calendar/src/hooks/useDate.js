@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 
-export const useDate = (events, nav) => {
-  const [dateDisplay, setDateDisplay] = useState('');
+export const useDate = (events, nav1, nav2) => {
+  const [dateDisplay1, setDateDisplay1] = useState('');
+  const [dateDisplay2, setDateDisplay2] = useState('');
   const [days, setDays] = useState([]);
 
   const eventForDate = date => events.find(e => e.date === date);
@@ -10,10 +11,12 @@ export const useDate = (events, nav) => {
     const weekdays = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday','Sunday'];
     const dt = new Date();
 
-    if (nav !== 0) {
-      dt.setMonth(new Date().getMonth() + nav);
+    if (nav1 !== 0) {
+      dt.setMonth(new Date().getMonth() + nav1);
     }
-
+    if (nav2 !== 0) {
+      dt.setFullYear(new Date().getFullYear() + nav2);
+    }
     const day = dt.getDate();
     const month = dt.getMonth();
     const year = dt.getFullYear();
@@ -27,7 +30,8 @@ export const useDate = (events, nav) => {
       day: 'numeric',
     });
 
-    setDateDisplay(`${dt.toLocaleDateString('fr-fr', { month: 'long' })} ${year}`);
+    setDateDisplay1(`${dt.toLocaleDateString('fr-fr', { month: 'long' })}`);
+    setDateDisplay2(`${dt.toLocaleDateString('fr-fr', { year: 'numeric' })}`);
     const paddingDays = weekdays.indexOf(dateString.split(', ')[0]);
 
     const daysArr = [];
@@ -39,7 +43,7 @@ export const useDate = (events, nav) => {
         daysArr.push({
           value: i - paddingDays,
           event: eventForDate(dayString),
-          isCurrentDay: i - paddingDays === day && nav === 0,
+          isCurrentDay: i - paddingDays === day && nav1 === 0 ,
           date: dayString,
         });
       } else {
@@ -53,10 +57,11 @@ export const useDate = (events, nav) => {
     }
 
     setDays(daysArr);
-  }, [events, nav]);
+  }, [events, nav1, nav2]);
 
   return {
     days,
-    dateDisplay,
+    dateDisplay1,
+    dateDisplay2,
   };
 };

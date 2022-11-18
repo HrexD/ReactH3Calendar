@@ -1,12 +1,22 @@
 import React from 'react';
 
-export const CalendarHeader = ({ onNext, onBack, dateDisplay }) => {
+export const CalendarHeader = ({ onNextM, onBackM,onNextY, onBackY, dateDisplay1, dateDisplay2 }) => {
   return(
     <div id="header">
-      <div id="monthDisplay">{dateDisplay}</div>
+      
+    
       <div>
-        <button onClick={onBack} id="BtnPrecedent">Precedent</button>
-        <button onClick={onNext} id="BtnSuivant">Suivant</button>
+        <button onClick={onBackM} id="BtnPrecedent"> ⬅️ </button>
+          <span id="monthDisplay">{dateDisplay1}</span>
+        <button onClick={onNextM} id="BtnSuivant"> ➡️ </button>
+        </div>
+     
+      
+      <div>
+        
+        <button onClick={onBackY} id="BtnPrecedent">⬅️</button>
+        <span id="yearDisplay">{dateDisplay2}</span>
+        <button onClick={onNextY} id="BtnSuivant">➡️</button>
       </div>
     </div>
   );

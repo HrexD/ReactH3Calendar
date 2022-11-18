@@ -20,20 +20,26 @@ body {
     padding: 5px;
     border-radius: 5px;
     color: white;
+    background: none;
+  }
+  
+  #BtnPrecedent, #BtnSuivant{
+    font-size: 25px;
+    border: none;
+    box-shadow: none;
+    overflow: hidden;
+    width:  auto;
   }
   
   #header {
     padding: 10px;
     color: #d36c6c;
     font-size: 26px;
-    font-family: sans-serif;
     display: flex;
     justify-content: space-between;
     text-transform: uppercase;
   }
-  #header button {
-    background-color:#92a1d1;
-  }
+
   #container {
     width: 770px;
   }
