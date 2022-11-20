@@ -75,7 +75,9 @@ body {
   }
   .day:hover {
     background-color: #c9f3d2;
-  }
+    text-decoration: underline;
+  
+    font-weight: 700;  }
   
   .day + .currentDay {
     background-color:#8ed9f0;
