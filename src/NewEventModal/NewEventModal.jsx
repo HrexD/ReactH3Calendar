@@ -1,23 +1,23 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
 export const NewEventModal = ({ onSave, onClose }) => {
-  const [title, setTitle] = useState('');
+  const [title, setTitle] = useState("");
   const [error, setError] = useState(false);
 
-  return(
+  return (
     <>
       <div id="newEventModal">
         <h2>Nouvel Evenement</h2>
 
-        <input 
-          className={error ? 'error' : ''}
-          value={title} 
-          onChange={e => setTitle(e.target.value)} 
-          id="eventTitleInput" 
-          placeholder="Entrer votre evenement" 
+        <input
+          className={error ? "error" : ""}
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+          id="eventTitleInput"
+          placeholder="Entrer votre evenement"
         />
 
-        <button 
+        <button
           onClick={() => {
             if (title) {
               setError(false);
@@ -25,13 +25,15 @@ export const NewEventModal = ({ onSave, onClose }) => {
             } else {
               setError(true);
             }
-          }} 
-          id="BtnSave">Sauvegarder</button>
+          }}
+          id="BtnSave"
+        >
+          Sauvegarder
+        </button>
 
-
-        <button 
-          onClick={onClose}
-          id="BtnCancel">Annuler</button>
+        <button onClick={onClose} id="BtnCancel">
+          Annuler
+        </button>
       </div>
 
       <div id="modalBackDrop"></div>

@@ -1,32 +1,32 @@
-import React, { useState, useEffect } from 'react';
-import { CalendarHeader } from '../CalendarHeader';
-import { Day } from '../Day';
-import { NewEventModal } from '../NewEventModal';
-import { DeleteEventModal } from '../DeleteEventModal';
-import { useDate } from '../hooks/useDate';
+import React, { useState, useEffect } from "react";
+import { CalendarHeader } from "../CalendarHeader";
+import { Day } from "../Day";
+import { NewEventModal } from "../NewEventModal";
+import { DeleteEventModal } from "../DeleteEventModal";
+import { useDate } from "../hooks/useDate";
 
 export const App = () => {
   const [nav1, setNav1] = useState(0);
   const [nav2, setNav2] = useState(0);
   const [clicked, setClicked] = useState();
   const [events, setEvents] = useState(
-    localStorage.getItem('events') ? 
-      JSON.parse(localStorage.getItem('events')) : 
-      []
+    localStorage.getItem("events")
+      ? JSON.parse(localStorage.getItem("events"))
+      : []
   );
 
-  const eventForDate = date => events.find(e => e.date === date);
+  const eventForDate = (date) => events.find((e) => e.date === date);
 
   useEffect(() => {
-    localStorage.setItem('events', JSON.stringify(events));
+    localStorage.setItem("events", JSON.stringify(events));
   }, [events]);
 
   const { days, dateDisplay1, dateDisplay2 } = useDate(events, nav1, nav2);
 
-  return(
+  return (
     <>
       <div id="container">
-        <CalendarHeader 
+        <CalendarHeader
           dateDisplay1={dateDisplay1}
           dateDisplay2={dateDisplay2}
           onNextM={() => setNav1(nav1 + 1)}
@@ -35,8 +35,7 @@ export const App = () => {
           onBackY={() => setNav2(nav2 - 1)}
         />
 
-<div id="semaine">
-         
+        <div id="semaine">
           <div>Lundi</div>
           <div>Mardi</div>
           <div>Mercredi</div>
@@ -52,7 +51,7 @@ export const App = () => {
               key={index}
               day={d}
               onClick={() => {
-                if (d.value !== 'padding') {
+                if (d.value !== "padding") {
                   setClicked(d.date);
                 }
               }}
@@ -61,28 +60,26 @@ export const App = () => {
         </div>
       </div>
 
-      {
-        clicked && !eventForDate(clicked) &&
+      {clicked && !eventForDate(clicked) && (
         <NewEventModal
           onClose={() => setClicked(null)}
-          onSave={title => {
-            setEvents([ ...events, { title, date: clicked }]);
+          onSave={(title) => {
+            setEvents([...events, { title, date: clicked }]);
             setClicked(null);
           }}
         />
-      }
+      )}
 
-      {
-        clicked && eventForDate(clicked) &&
-        <DeleteEventModal 
+      {clicked && eventForDate(clicked) && (
+        <DeleteEventModal
           eventText={eventForDate(clicked).title}
           onClose={() => setClicked(null)}
           onDelete={() => {
-            setEvents(events.filter(e => e.date !== clicked));
+            setEvents(events.filter((e) => e.date !== clicked));
             setClicked(null);
           }}
         />
-      }
+      )}
     </>
   );
 };
